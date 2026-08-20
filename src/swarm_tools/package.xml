@@ -1,0 +1,15 @@
+<?xml version="1.0"?>
+<package format="2">
+  <name>swarm_tools</name>
+  <version>0.0.0</version>
+  <description>录制与绘图工具: rosbag 一键录制脚本 + 验收图绘制脚本</description>
+  <maintainer email="zxingchen466@gmail.com">xingchen466</maintainer>
+  <license>MIT</license>
+
+  <buildtool_depend>catkin</buildtool_depend>
+  <depend>rospy</depend>
+  <depend>std_msgs</depend>
+  <depend>geometry_msgs</depend>
+  <depend>rosbag</depend>
+  <depend>consensus_ctrl</depend>
+</package>

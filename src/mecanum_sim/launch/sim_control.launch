@@ -1,0 +1,34 @@
+<?xml version="1.0"?>
+<launch>
+
+  <param name="/use_sim_time" value="true"/>
+
+  <include file="$(find gazebo_ros)/launch/empty_world.launch">
+    <arg name="world_name" value="$(find mecanum_sim)/worlds/flat.world"/>
+    <arg name="paused" value="false"/>
+    <arg name="use_sim_time" value="true"/>
+    <arg name="gui" value="true"/>
+    <arg name="headless" value="false"/>
+    <arg name="debug" value="false"/>
+  </include>
+
+  <group ns="robot_1">
+
+    <param name="robot_description"
+           command="$(find xacro)/xacro $(find mecanum_sim)/urdf/mecanum.xacro"/>
+
+    <node name="spawn_robot" pkg="gazebo_ros" type="spawn_model"
+          args="-param robot_description -urdf -model robot_1
+                -x 0 -y 0 -z 0.15" output="screen"/>
+
+    <node name="traj_generator" pkg="consensus_ctrl" type="traj_generator.py" output="screen">
+      <rosparam command="load" file="$(find consensus_ctrl)/config/traj.yaml"/>
+    </node>
+
+    <node name="controller" pkg="consensus_ctrl" type="controller_node.py" output="screen">
+      <rosparam command="load" file="$(find consensus_ctrl)/config/ctrl.yaml"/>
+    </node>
+
+  </group>
+
+</launch>

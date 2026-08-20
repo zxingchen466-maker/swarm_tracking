@@ -1,0 +1,44 @@
+<?xml version="1.0"?>
+  <sdf version="1.6">
+    <world name="flat_world">
+
+      <!-- 光照 -->
+      <include>
+        <uri>model://sun</uri>
+      </include>
+
+      <!-- 地面 -->
+      <model name="ground_plane">
+        <static>true</static>
+        <link name="link">
+          <collision name="collision">
+            <geometry>
+              <plane>
+                <normal>0 0 1</normal>
+                <size>20 20</size>
+              </plane>
+            </geometry>
+          </collision>
+          <visual name="visual">
+            <geometry>
+              <plane>
+                <normal>0 0 1</normal>
+                <size>20 20</size>
+              </plane>
+            </geometry>
+            <material>
+              <ambient>0.3 0.3 0.3 1</ambient>
+              <diffuse>0.5 0.5 0.5 1</diffuse>
+            </material>
+          </visual>
+        </link>
+      </model>
+
+      <!-- 物理引擎 -->
+      <physics type="ode">
+        <real_time_update_rate>1000</real_time_update_rate>
+        <max_step_size>0.001</max_step_size>
+      </physics>
+
+    </world>
+  </sdf>

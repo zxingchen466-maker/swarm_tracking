@@ -1,0 +1,8 @@
+<?xml version="1.0"?>
+  <launch>
+    <group ns="robot_1">
+      <node name="traj_generator" pkg="consensus_ctrl" type="traj_generator.py" output="screen">
+        <rosparam command="load" file="$(find consensus_ctrl)/config/traj.yaml"/>
+      </node>
+    </group>
+  </launch>

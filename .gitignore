@@ -1,0 +1,9 @@
+build/
+devel/
+logs/
+install/
+*.bag
+bags/
+.catkin_tools/
+__pycache__/
+*.pyc

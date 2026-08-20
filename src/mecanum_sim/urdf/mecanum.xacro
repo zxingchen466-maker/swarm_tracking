@@ -1,0 +1,115 @@
+<?xml version="1.0"?>
+  <robot xmlns:xacro="http://www.ros.org/wiki/xacro" name="mecanum_robot">
+
+    <!-- ===== 车体：一个盒子 ===== -->
+    <link name="base_link">
+      <visual>
+        <geometry>
+          <box size="0.50 0.35 0.20"/>
+        </geometry>
+        <material name="blue">
+          <color rgba="0.2 0.4 0.8 1.0"/>
+        </material>
+      </visual>
+      <collision>
+        <geometry>
+          <box size="0.50 0.35 0.20"/>
+        </geometry>
+      </collision>
+      <inertial>
+        <mass value="5.0"/>
+        <inertia ixx="0.10" ixy="0" ixz="0" iyy="0.15" iyz="0" izz="0.20"/>
+      </inertial>
+    </link>
+
+    <!-- ===== 四个装饰轮子（fixed joint、纯视觉） ===== -->
+    <!-- 左前轮 -->
+    <link name="wheel_fl">
+      <visual>
+        <geometry>
+          <cylinder radius="0.08" length="0.04"/>
+        </geometry>
+        <material name="black">
+          <color rgba="0.1 0.1 0.1 1.0"/>
+        </material>
+      </visual>
+      <inertial>
+        <mass value="0.1"/>
+        <inertia ixx="0.001" ixy="0" ixz="0" iyy="0.001" iyz="0" izz="0.001"/>
+      </inertial>
+    </link>
+    <joint name="wheel_fl_joint" type="fixed">
+      <parent link="base_link"/>
+      <child link="wheel_fl"/>
+      <origin xyz="0.20 0.20 -0.08" rpy="0 0 0"/>
+    </joint>
+
+    <!-- 右前轮 -->
+    <link name="wheel_fr">
+      <visual>
+        <geometry>
+          <cylinder radius="0.08" length="0.04"/>
+        </geometry>
+        <material name="black"/>
+      </visual>
+      <inertial>
+        <mass value="0.1"/>
+        <inertia ixx="0.001" ixy="0" ixz="0" iyy="0.001" iyz="0" izz="0.001"/>
+      </inertial>
+    </link>
+    <joint name="wheel_fr_joint" type="fixed">
+      <parent link="base_link"/>
+      <child link="wheel_fr"/>
+      <origin xyz="0.20 -0.20 -0.08" rpy="0 0 0"/>
+    </joint>
+
+    <!-- 左后轮 -->
+    <link name="wheel_rl">
+      <visual>
+        <geometry>
+          <cylinder radius="0.08" length="0.04"/>
+        </geometry>
+        <material name="black"/>
+      </visual>
+      <inertial>
+        <mass value="0.1"/>
+        <inertia ixx="0.001" ixy="0" ixz="0" iyy="0.001" iyz="0" izz="0.001"/>
+      </inertial>
+    </link>
+    <joint name="wheel_rl_joint" type="fixed">
+      <parent link="base_link"/>
+      <child link="wheel_rl"/>
+      <origin xyz="-0.20 0.20 -0.08" rpy="0 0 0"/>
+    </joint>
+
+    <!-- 右后轮 -->
+    <link name="wheel_rr">
+      <visual>
+        <geometry>
+          <cylinder radius="0.08" length="0.04"/>
+        </geometry>
+        <material name="black"/>
+      </visual>
+      <inertial>
+        <mass value="0.1"/>
+        <inertia ixx="0.001" ixy="0" ixz="0" iyy="0.001" iyz="0" izz="0.001"/>
+      </inertial>
+    </link>
+    <joint name="wheel_rr_joint" type="fixed">
+      <parent link="base_link"/>
+      <child link="wheel_rr"/>
+      <origin xyz="-0.20 -0.20 -0.08" rpy="0 0 0"/>
+    </joint>
+
+    <!-- ===== 全向运动插件 ===== -->
+    <gazebo>
+      <plugin name="omni_drive" filename="libgazebo_ros_planar_move.so">
+        <commandTopic>cmd_vel</commandTopic>
+        <odometryTopic>odom</odometryTopic>
+        <odometryFrame>odom</odometryFrame>
+        <robotBaseFrame>base_link</robotBaseFrame>
+        <odometryRate>100.0</odometryRate>
+      </plugin>
+    </gazebo>
+
+  </robot>

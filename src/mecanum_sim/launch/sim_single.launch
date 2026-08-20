@@ -1,0 +1,24 @@
+<?xml version="1.0"?>
+  <launch>
+
+    <param name="/use_sim_time" value="true"/>
+
+    <include file="$(find gazebo_ros)/launch/empty_world.launch">
+      <arg name="world_name" value="$(find mecanum_sim)/worlds/flat.world"/>
+      <arg name="paused" value="false"/>
+      <arg name="use_sim_time" value="true"/>
+      <arg name="gui" value="true"/>
+      <arg name="headless" value="false"/>
+      <arg name="debug" value="false"/>
+    </include>
+
+    <param name="robot_description"
+           command="$(find xacro)/xacro $(find mecanum_sim)/urdf/mecanum.xacro"/>
+
+    <group ns="robot_1">
+      <node name="spawn_robot" pkg="gazebo_ros" type="spawn_model"
+            args="-param /robot_description -urdf -model robot_1
+                  -x 0 -y 0 -z 0.15" output="screen"/>
+    </group>
+
+  </launch>

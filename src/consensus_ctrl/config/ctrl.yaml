@@ -1,0 +1,10 @@
+  rate: 50
+  controller_type: pd
+  vmax: 1.0
+  wmax: 2.0
+  timeout: 0.5
+
+  ctrl_params:
+    Kp: 1.5
+    Kd: 0.0
+    Kp_yaw: 1.5

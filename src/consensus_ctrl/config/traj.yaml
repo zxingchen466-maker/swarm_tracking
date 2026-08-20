@@ -1,0 +1,12 @@
+rate: 50
+traj_type: fig8
+t_ramp: 3.0
+yaw_mode: fixed
+
+circle:
+    R: 1.5
+    T: 20.0
+
+fig8:
+    A: 1.5
+    T: 25.0
